@@ -5,7 +5,7 @@ Using the odesolver library consists of:
 3. Calling Solve() to integrate through time
 
 Here is an example that solves the ODE x'=-2*x+2 from t = 0
-to t = 10, with a timestep of 0.1. We plot the trajectory
+to t = 100, with a timestep of 0.1. We plot the trajectory
 using a C++ interface for GNUPlot.
 */
 
