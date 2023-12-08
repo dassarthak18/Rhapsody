@@ -4,8 +4,7 @@ Using the odesolver library consists of:
 2. Constructing a Solver instance, passing the string
 3. Calling Solve() to integrate through time
 
-Here is an example that solves the ODE x'=-2*x+2 from t = 0
-to t = 100, with a timestep of 0.1. We plot the trajectory
+Here is an example. We plot the trajectory
 using a C++ interface for GNUPlot.
 */
 
@@ -15,13 +14,27 @@ using a C++ interface for GNUPlot.
 
 int main()
 {
+
+  // Input
+  string ode;
+  double time_horizon, time_step, t0, x0;
+  cout<<"Enter the ODE to solve: ";
+  getline (cin, ode);
+  cout<<"Enter the time horizon: ";
+  cin>>time_horizon;
+  cout<<"Enter the time step for computation: ";
+  cin>>time_step;
+  cout<<"Enter the initial time: ";
+  cin>>t0;
+  cout<<"Enter the initial x value: ";
+  cin>>x0;
+
   // Solving the ODE
-  string ode = "x'=-2*x+2";
   auto solver = ode::Solver(ode);
   pair<double, double> initial;
-  initial.first = 0;
-  initial.second = 0;
-  auto trajectory = solver.Solve(100.0, 0.1, initial);
+  initial.first = t0;
+  initial.second = x0;
+  auto trajectory = solver.Solve(time_horizon, time_step, initial);
 
   // Writing the trajectory into a data file
   ofstream outfile;
