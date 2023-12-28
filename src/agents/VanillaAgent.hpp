@@ -10,6 +10,8 @@ The simulate function follows the algorithm:
   print the plot of the trajectory
 */
 
+#pragma once
+
 #include <vector>
 #include <string>
 #include <bits/stdc++.h>
@@ -34,5 +36,5 @@ class VanillaAgent
 
 void VanillaAgent::Simulate()
 {
-	
+
 }
