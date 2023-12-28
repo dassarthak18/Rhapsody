@@ -1,6 +1,5 @@
 #pragma once
 
-#include <bits/stdc++.h>
 #include <regex>
 #include "../ode/ode_solver.hpp"
 
@@ -9,11 +8,11 @@ using namespace std;
 class VanillaAgent
 { 
   public:
-  	vector<pair<string, double>> ContVars;
+  	vector<pair<string, double> > ContVars;
 	vector<string> ContDynamics;
 	void Simulate(double time_horizon, double time_step);
 
-	void DiscDynamics()
+	virtual void DiscDynamics()
 	{}
 };
 
@@ -31,9 +30,9 @@ void VanillaAgent::Simulate(double time_horizon, double time_step)
 		vector<double> updated_vals;
 		for (int i = 0; i < ContDynamics.size(); i++)
 		{
-			tokens = split(ContDynamics[i], '=');
-			lhs = tokens[0];
-			rhs = tokens[1];
+			vector<string> tokens = split(ContDynamics[i], '=');
+			string lhs = tokens[0];
+			string rhs = tokens[1];
 			vector<string> vars;
 			vector<double> vals;
 			for (auto j : ContVars)

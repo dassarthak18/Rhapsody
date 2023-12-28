@@ -61,7 +61,7 @@ namespace ode
       of the format x'=a*x+b.
       */
       double compute_one_step(double x0, double time_step);
-      vector<pair<double, double>> Solve(double time_horizon, double time_step, pair<double, double> y0);
+      vector<pair<double, double> > Solve(double time_horizon, double time_step, pair<double, double> y0);
 
       Solver(string str)
       {
@@ -129,14 +129,14 @@ double ode::Solver::compute_one_step(double x0, double time_step)
   }
 }
 
-vector<pair<double, double>> ode::Solver::Solve(double time_horizon, double time_step, pair<double, double> y0)
+vector<pair<double, double> > ode::Solver::Solve(double time_horizon, double time_step, pair<double, double> y0)
 /*
 The main method for solving the ODE is Solve(), which advances the state in time
 and returns the full state history. The return is a vector containing interleaved
 time and state values that can be easily plotted or analyzed.
 */
 {
-  vector<pair<double, double>> trajectory;
+  vector<pair<double, double> > trajectory;
   trajectory.push_back(y0);
   int no_of_steps = time_horizon/time_step;
   double t = y0.first;
