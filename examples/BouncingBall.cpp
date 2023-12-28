@@ -11,5 +11,6 @@ int main()
   int result = remove("trajectory.dat");
   auto plotv = plotter::Plotter(trajectories[1]);
   plotv.Plot();
+  int result = remove("trajectory.dat");
   return 0;
 }
