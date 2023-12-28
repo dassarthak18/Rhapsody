@@ -53,7 +53,6 @@ namespace ode
   {
     vector<double> coefficients;
     vector<double> extract_coefficients(string ode);
-    double compute_one_step(double x0, double time_step);
 
     public:
       /*
@@ -61,6 +60,7 @@ namespace ode
       The constructor takes the system dynamics as a string
       of the format x'=a*x+b.
       */
+      double compute_one_step(double x0, double time_step);
       vector<pair<double, double>> Solve(double time_horizon, double time_step, pair<double, double> y0);
 
       Solver(string str)
