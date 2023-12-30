@@ -11,6 +11,8 @@ namespace plotter
     public:
       void Plot();
 
+      /* Have a constructor to take the variable name to plot vs time*/
+      /* Have a generic constructor that takes two variables of the system to plot*/
       Plotter(vector<pair<double, double> > traj)
       {
         trajectory = traj;
