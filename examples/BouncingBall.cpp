@@ -5,7 +5,7 @@
 int main()
 {
   /* elaborate on the arguments of the agent constructor*/
-  BallAgent ball {10, 0};
+  BallAgent<double> ball {10, 0};
   /* elaborate on the arguments of Simulate */
   /*Todo: Changing the time-step leads to wrong simulations. Need to fix this*/
   auto trajectories = ball.Simulate(20, 0.01);

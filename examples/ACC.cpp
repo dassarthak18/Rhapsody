@@ -3,11 +3,11 @@
 
 int main()
 {
-  NPCAgent lead(10, 10);
-  vector<VanillaAgent*> Others;
+  NPCAgent<double> lead(10, 10);
+  vector<VanillaAgent<double>*> Others;
   Others.push_back(&lead);
   /* elaborate on the arguments*/
-  CarAgent ego(8, 0, 28, Others);
+  CarAgent<double> ego(8, 0, 28, Others);
   auto trajectories = ego.Simulate(100, 0.01);
   auto plotx = plotter::Plotter(trajectories[0]);
   plotx.Plot();

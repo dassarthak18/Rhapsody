@@ -2,47 +2,48 @@
 #include <random>
 #include "VanillaAgent.hpp"
 
-class BallAgent : public VanillaAgent
+template<typename T>
+class BallAgent : public VanillaAgent<T>
 {
   void DiscDynamics() override;
   
   public:
 
-    BallAgent(double x0, double v0)
+    BallAgent(T x0, T v0)
     {
-      initLB = {x0, v0};
-      initUB = {x0, v0};
-      ContVars = {"x", "v"};
-      CurrentState = {x0, v0};
-      ContDynamics = {"x'=v", "v'=-9.8"};
+	VanillaAgent<T>::initLB = {x0, v0};
+	VanillaAgent<T>::initUB = {x0, v0};
+	VanillaAgent<T>::ContVars = {"x", "v"};
+	VanillaAgent<T>::CurrentState = {x0, v0};
+	VanillaAgent<T>::ContDynamics = {"x'=v", "v'=-9.8"};
     }
 
-    BallAgent(double xl, double xu, double vl, double vu)
+    BallAgent(T xl, T xu, T vl, T vu)
     {
-      initLB = {xl, vl};
-      initUB = {xu, vu};
-      ContVars = {"x", "v"};
+      VanillaAgent<T>::initLB = {xl, vl};
+      VanillaAgent<T>::initUB = {xu, vu};
+      VanillaAgent<T>::ContVars = {"x", "v"};
 
       std::random_device rd1;
       std::mt19937 gen1(rd1());
       std::uniform_real_distribution<> dis1(xl, xu);
-      double x0 = dis1(gen1);
+      T x0 = dis1(gen1);
 
       std::random_device rd2;
       std::mt19937 gen2(rd2());
       std::uniform_real_distribution<> dis2(vl, vu);
-      double v0 = dis2(gen2);
+      T v0 = dis2(gen2);
 
-      CurrentState = {x0, v0};
-      ContDynamics = {"x'=v", "v'=-9.8"};
+      VanillaAgent<T>::CurrentState = {x0, v0};
+      VanillaAgent<T>::ContDynamics = {"x'=v", "v'=-9.8"};
     }
 };
-
-void BallAgent::DiscDynamics()
+template<typename T>
+void BallAgent<T>::DiscDynamics()
 {
-  if (CurrentState[0] <= 0)
+  if (VanillaAgent<T>::CurrentState[0] <= 0)
   {
-    CurrentState[0] = 0;
-    CurrentState[1] = -0.9*CurrentState[1];
+    VanillaAgent<T>::CurrentState[0] = 0;
+    VanillaAgent<T>::CurrentState[1] = -0.9*VanillaAgent<T>::CurrentState[1];
   }
 }

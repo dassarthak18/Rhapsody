@@ -2,97 +2,100 @@
 #include <random>
 #include "VanillaAgent.hpp"
 
-class NPCAgent : public VanillaAgent
+template<typename T>
+class NPCAgent : public VanillaAgent<T>
 {
   public:
 
-    NPCAgent(double x0, double v0)
+    NPCAgent(T x0, T v0)
     {
-      initLB = {x0, v0};
-      initUB = {x0, v0};
-      ContVars = {"x", "v"};
-      CurrentState = {x0, v0};
-      ContDynamics = {"x'=v", "v'=0"};
+      VanillaAgent<T>::initLB = {x0, v0};
+      VanillaAgent<T>::initUB = {x0, v0};
+      VanillaAgent<T>::ContVars = {"x", "v"};
+      VanillaAgent<T>::CurrentState = {x0, v0};
+      VanillaAgent<T>::ContDynamics = {"x'=v", "v'=0"};
     }
 
-    NPCAgent(double xl, double xu, double vl, double vu)
+    NPCAgent(T xl, T xu, T vl, T vu)
     {
-      initLB = {xl, vl};
-      initUB = {xu, vu};
-      ContVars = {"x", "v"};
+      VanillaAgent<T>::initLB = {xl, vl};
+      VanillaAgent<T>::initUB = {xu, vu};
+      VanillaAgent<T>::ContVars = {"x", "v"};
 
       std::random_device rd1;
       std::mt19937 gen1(rd1());
       std::uniform_real_distribution<> dis1(xl, xu);
-      double x0 = dis1(gen1);
+      T x0 = dis1(gen1);
 
       std::random_device rd2;
       std::mt19937 gen2(rd2());
       std::uniform_real_distribution<> dis2(vl, vu);
-      double v0 = dis2(gen2);
+      T v0 = dis2(gen2);
 
-      CurrentState = {x0, v0};
-      ContDynamics = {"x'=v", "v'=0"};
+      VanillaAgent<T>::CurrentState = {x0, v0};
+      VanillaAgent<T>::ContDynamics = {"x'=v", "v'=0"};
     }
 };
 
-class CarAgent : public VanillaAgent
+template<typename T>
+class CarAgent : public VanillaAgent<T>
 {
   void DiscDynamics() override;
   
   public:
-    vector<VanillaAgent*> Others;
-    CarAgent(double x0, double v0, double a0, vector<VanillaAgent*> others)
+    vector<VanillaAgent<T>* > Others;
+    CarAgent(T x0, T v0, T a0, vector<VanillaAgent<T>*> others)
     {
-      initLB = {x0, v0, a0};
-      initUB = {x0, v0, a0};
-      ContVars = {"x", "v", "a"};
-      CurrentState = {x0, v0, a0};
-      ContDynamics = {"x'=v", "v'=a", "a'=0"};
+      VanillaAgent<T>::initLB = {x0, v0, a0};
+      VanillaAgent<T>::initUB = {x0, v0, a0};
+      VanillaAgent<T>::ContVars = {"x", "v", "a"};
+      VanillaAgent<T>::CurrentState = {x0, v0, a0};
+      VanillaAgent<T>::ContDynamics = {"x'=v", "v'=a", "a'=0"};
       Others = others;
     }
 
-    CarAgent(double xl, double xu, double vl, double vu, double al, double au, vector<VanillaAgent*> others)
+    CarAgent(T xl, T xu, T vl, T vu, T al, T au, vector<VanillaAgent<T>*> others)
     {
-      initLB = {xl, vl, al};
-      initUB = {xu, vu, au};
-      ContVars = {"x", "v", "a"};
+      VanillaAgent<T>::initLB = {xl, vl, al};
+      VanillaAgent<T>::initUB = {xu, vu, au};
+      VanillaAgent<T>::ContVars = {"x", "v", "a"};
 
       std::random_device rd1;
       std::mt19937 gen1(rd1());
       std::uniform_real_distribution<> dis1(xl, xu);
-      double x0 = dis1(gen1);
+      T x0 = dis1(gen1);
 
       std::random_device rd2;
       std::mt19937 gen2(rd2());
       std::uniform_real_distribution<> dis2(vl, vu);
-      double v0 = dis2(gen2);
+      T v0 = dis2(gen2);
 
       std::random_device rd3;
       std::mt19937 gen3(rd3());
       std::uniform_real_distribution<> dis3(al, au);
-      double a0 = dis3(gen2);
+      T a0 = dis3(gen2);
 
-      CurrentState = {x0, v0, a0};
-      ContDynamics = {"x'=v", "v'=a", "a'=0"};
-      Others = others;
+      VanillaAgent<T>::CurrentState = {x0, v0, a0};
+      VanillaAgent<T>::ContDynamics = {"x'=v", "v'=a", "a'=0"};
+      VanillaAgent<T>::Others = others;
     }
 };
 
-void CarAgent::DiscDynamics()
+template<typename T>
+void CarAgent<T>::DiscDynamics()
 {
-  if (Others[0]->CurrentState[0] - CurrentState[0] <= 5 && Others[0]->CurrentState[0] - CurrentState[0] > 0 && CurrentState[2] > 0)
+  if (Others[0]->CurrentState[0] - VanillaAgent<T>::CurrentState[0] <= 5 && Others[0]->CurrentState[0] - VanillaAgent<T>::CurrentState[0] > 0 && VanillaAgent<T>::CurrentState[2] > 0)
   {
-    CurrentState[2] = -1*CurrentState[2];
+    VanillaAgent<T>::CurrentState[2] = -1*VanillaAgent<T>::CurrentState[2];
   }
-  else if (Others[0]->CurrentState[0] - CurrentState[0] >= 10 && CurrentState[2] < 0)
+  else if (Others[0]->CurrentState[0] - VanillaAgent<T>::CurrentState[0] >= 10 && VanillaAgent<T>::CurrentState[2] < 0)
   {
-    CurrentState[2] = -1*CurrentState[2];
+    VanillaAgent<T>::CurrentState[2] = -1*VanillaAgent<T>::CurrentState[2];
   }
-  else if (CurrentState[0] == Others[0]->CurrentState[0])
+  else if (VanillaAgent<T>::CurrentState[0] == Others[0]->VanillaAgent<T>::CurrentState[0])
   {
-    CurrentState[1] = 0;
-    CurrentState[2] = 0;
+    VanillaAgent<T>::CurrentState[1] = 0;
+    VanillaAgent<T>::CurrentState[2] = 0;
     Others[0]->CurrentState[1] = 0;
   }
 }
