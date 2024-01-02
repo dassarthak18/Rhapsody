@@ -1,3 +1,8 @@
+/*
+plotter is a header-only library for plotting trajectories. It provides capabilities
+for plotting trajectories passed to it via an external C++ wrapper for GNUPlot.
+*/
+
 #pragma once
 #include <fstream>
 #include<algorithm>
@@ -10,11 +15,13 @@ namespace plotter
   class Plotter
   {
     VanillaAgent<T>* plottedAgent;
-    vector<pair<T, T> > yAxis;
-    vector<pair<T, T> > xAxis;
+    vector<pair<T, T> > yAxis, xAxis;
+    string xvar, yvar;
 
     public:
       void Plot();
+
+      /* We have the option to plot any two variables, or plot a variable against time.*/
 
       Plotter(VanillaAgent<T>* plottedAgent, string x_var_name, string y_var_name, vector<vector<pair<T, T> > > traj)
       {
@@ -24,6 +31,8 @@ namespace plotter
         int y_index = it - plottedAgent->ContVars.begin();
         xAxis = traj[x_index];
         yAxis = traj[y_index];
+        xvar = x_var_name;
+        yvar = y_var_name;
       }
 
       Plotter(VanillaAgent<T>* plottedAgent, string var_name, vector<vector<pair<T, T> > > traj)
@@ -31,6 +40,8 @@ namespace plotter
         auto it = find(plottedAgent->ContVars.begin(), plottedAgent->ContVars.end(), var_name);
         int index = it - plottedAgent->ContVars.begin();
         yAxis = traj[index];
+        xvar = "Time";
+        yvar = y_var_name;
       }
 
       ~Plotter()
@@ -40,6 +51,11 @@ namespace plotter
   };
 }
 
+/*
+The main method for plotting the trajectory is Plot(), which simply passes
+the trajectory to be plotted to GNUPlot via generation of an intermediary
+data file..
+*/
 template<typename T>
 void plotter::Plotter<T>::Plot()
 {
@@ -62,6 +78,8 @@ void plotter::Plotter<T>::Plot()
   }
   outfile.close();
   GnuplotPipe gp;
+  gp.sendLine("set xlabel \"" + xvar + "\"");
+  gp.sendLine("set ylabel \"" + yvar + "\"");
   if (xAxis.empty())
   {
     gp.sendLine("plot 'trajectory.dat' using 1:2 with lines");
