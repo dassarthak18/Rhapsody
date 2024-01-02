@@ -3,14 +3,23 @@
 
 int main()
 {
+  /* To create an agent, we pass the initial values
+  of its continuous variables as argument. Here, as
+  NPCAgent is a pre-defined Agent type, we have continuous
+  variables x and v whose initial values are set to be 10 and
+  10 respectively.*/
   NPCAgent<double> lead(10, 10);
-  vector<VanillaAgent<double>*> Others;
+  vector<VanillaAgent<double>*> Others; // This is our "other" agent.
   Others.push_back(&lead);
-  /* elaborate on the arguments*/
-  CarAgent<double> ego(8, 0, 28, Others);
+  /* For our second agent of type CarAgent,
+  the initial values are set to be x = 8, v = 0, a = 28.
+  It also takes as argument all the other agents in the
+  environment. This is our temporary stand-in of having
+  a basic default sensor.*/
+  CarAgent<double> ego(8, 0, 28, Others); // This is the main agent we are interested in.
+  /* We now plot the trajectories of the agent's x with respect to time. */
   auto trajectories = ego.Simulate(100, 0.01);
-  auto plotx = plotter::Plotter(trajectories[0]);
+  auto plotx = plotter::Plotter(&ego, "x", trajectories);
   plotx.Plot();
-  int result = remove("trajectory.dat");
   return 0;
 }
