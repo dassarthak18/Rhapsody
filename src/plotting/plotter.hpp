@@ -41,7 +41,7 @@ namespace plotter
         int index = it - plottedAgent->ContVars.begin();
         yAxis = traj[index];
         xvar = "Time";
-        yvar = y_var_name;
+        yvar = var_name;
       }
 
       ~Plotter()

@@ -80,10 +80,12 @@ class CarAgent : public VanillaAgent<T>
       VanillaAgent<T>::Others = others;
     }
 };
+/* ToDo: Comment in this dynamics. What is the objective of the controller?*/
 
 template<typename T>
 void CarAgent<T>::DiscDynamics()
 {
+  /* What does each conditions mean and what is the control action? */
   if (Others[0]->CurrentState[0] - VanillaAgent<T>::CurrentState[0] <= 5 && Others[0]->CurrentState[0] - VanillaAgent<T>::CurrentState[0] > 0 && VanillaAgent<T>::CurrentState[2] > 0)
   {
     VanillaAgent<T>::CurrentState[2] = -1*VanillaAgent<T>::CurrentState[2];

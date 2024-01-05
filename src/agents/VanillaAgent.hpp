@@ -21,8 +21,12 @@ class VanillaAgent
 
 	vector<vector<pair<T, T> > > Simulate(double time_horizon, double time_step);
 
-	virtual void DiscDynamics()
-	{}
+	/* ToDo: Have another simulate method here which takes an arg n and simulates n trajectories from random starting points
+     * Consider a parallel implementation of simulating n trajectories.
+	 */
+
+	/* Why virtual? I removed it and the override keyword in the derived class. It still works!*/
+	void DiscDynamics(){}
 };
 
 template<typename T>

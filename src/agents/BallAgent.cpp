@@ -5,7 +5,7 @@
 template<typename T>
 class BallAgent : public VanillaAgent<T>
 {
-  void DiscDynamics() override;
+  void DiscDynamics();
   
   public:
 
@@ -38,6 +38,8 @@ class BallAgent : public VanillaAgent<T>
       VanillaAgent<T>::ContDynamics = {"x'=v", "v'=-9.8"};
     }
 };
+/* ToDo: Comment on the discrete dynamics*/
+
 template<typename T>
 void BallAgent<T>::DiscDynamics()
 {
