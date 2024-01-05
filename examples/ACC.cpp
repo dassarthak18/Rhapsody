@@ -1,6 +1,8 @@
 #include "../src/agents/CarAgent.cpp"
 #include "../src/plotting/plotter.hpp"
 
+/* How to model an ACC with more than 2 cars? Can our library support that? */
+
 int main()
 {
   /* To create an agent, we pass the initial values
