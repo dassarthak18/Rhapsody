@@ -43,8 +43,8 @@ class CarAgent : public VanillaAgent<T>
   void DiscDynamics() override;
   
   public:
-    vector<VanillaAgent<T>* > Others;
-    CarAgent(T x0, T v0, T a0, vector<VanillaAgent<T>*> others)
+    vector<VanillaAgent<T>> Others;
+    CarAgent(T x0, T v0, T a0, vector<VanillaAgent<T>> others)
     {
       VanillaAgent<T>::initLB = {x0, v0, a0};
       VanillaAgent<T>::initUB = {x0, v0, a0};
@@ -54,7 +54,7 @@ class CarAgent : public VanillaAgent<T>
       Others = others;
     }
 
-    CarAgent(T xl, T xu, T vl, T vu, T al, T au, vector<VanillaAgent<T>*> others)
+    CarAgent(T xl, T xu, T vl, T vu, T al, T au, vector<VanillaAgent<T>&> others)
     {
       VanillaAgent<T>::initLB = {xl, vl, al};
       VanillaAgent<T>::initUB = {xu, vu, au};
@@ -77,27 +77,27 @@ class CarAgent : public VanillaAgent<T>
 
       VanillaAgent<T>::CurrentState = {x0, v0, a0};
       VanillaAgent<T>::ContDynamics = {"x'=v", "v'=a", "a'=0"};
-      VanillaAgent<T>::Others = others;
+      Others = others;
     }
 };
-/* ToDo: Comment in this dynamics. What is the objective of the controller?*/
 
+/* ToDo: Comment in this dynamics. What is the objective of the controller?*/
 template<typename T>
 void CarAgent<T>::DiscDynamics()
 {
-  /* What does each conditions mean and what is the control action? */
-  if (Others[0]->CurrentState[0] - VanillaAgent<T>::CurrentState[0] <= 5 && Others[0]->CurrentState[0] - VanillaAgent<T>::CurrentState[0] > 0 && VanillaAgent<T>::CurrentState[2] > 0)
+    /* What does each conditions mean and what is the control action? */
+  if (Others[0].CurrentState[0] - VanillaAgent<T>::CurrentState[0] <= 5 && Others[0].CurrentState[0] - VanillaAgent<T>::CurrentState[0] > 0 && VanillaAgent<T>::CurrentState[2] > 0)
   {
     VanillaAgent<T>::CurrentState[2] = -1*VanillaAgent<T>::CurrentState[2];
   }
-  else if (Others[0]->CurrentState[0] - VanillaAgent<T>::CurrentState[0] >= 10 && VanillaAgent<T>::CurrentState[2] < 0)
+  else if (Others[0].CurrentState[0] - VanillaAgent<T>::CurrentState[0] >= 10 &&  VanillaAgent<T>::CurrentState[2] < 0)
   {
     VanillaAgent<T>::CurrentState[2] = -1*VanillaAgent<T>::CurrentState[2];
   }
-  else if (VanillaAgent<T>::CurrentState[0] == Others[0]->VanillaAgent<T>::CurrentState[0])
+  else if (VanillaAgent<T>::CurrentState[0] == Others[0].CurrentState[0])
   {
     VanillaAgent<T>::CurrentState[1] = 0;
     VanillaAgent<T>::CurrentState[2] = 0;
-    Others[0]->CurrentState[1] = 0;
+    Others[0].CurrentState[1] = 0;
   }
 }

@@ -16,23 +16,25 @@ class VanillaAgent
   	vector<string> ContVars;
   	vector<string> ContDynamics;
   	vector<T> CurrentState;
-	vector<T> initLB;
-	vector<T> initUB;
+		vector<T> initLB;
+		vector<T> initUB;
 
-	vector<vector<pair<T, T> > > Simulate(double time_horizon, double time_step);
+		vector<vector<pair<T, T> > > Simulate(double time_horizon);
 
-	/* ToDo: Have another simulate method here which takes an arg n and simulates n trajectories from random starting points
-     * Consider a parallel implementation of simulating n trajectories.
-	 */
+		/* ToDo: Have another simulate method here which takes an arg n and simulates n trajectories from random starting points
+    	 * Consider a parallel implementation of simulating n trajectories.
+	 	*/
 
-	/* Why virtual? I removed it and the override keyword in the derived class. It still works!*/
-	void DiscDynamics(){}
+		/* Why virtual? I removed it and the override keyword in the derived class. It still works!*/
+		virtual void DiscDynamics()
+		{}
 };
 
 template<typename T>
-vector<vector<pair<T, T> > > VanillaAgent<T>::Simulate(double time_horizon, double time_step)
+vector<vector<pair<T, T> > > VanillaAgent<T>::Simulate(double time_horizon)
 {
 	double t = 0;
+	double time_step = time_horizon/10000;
 	vector<vector<pair<T, T> > > trajectories;
 	for (int i = 0; i < ContVars.size(); i++)
 	{

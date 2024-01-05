@@ -1,6 +1,5 @@
-
 #include "../src/agents/BallAgent.cpp"
-#include "../src/plotting/plotter.hpp"
+#include "../src/scenario/scenario.hpp"
 
 int main()
 {
@@ -9,22 +8,27 @@ int main()
   BallAgent is a pre-defined Agent type, we have continuous
   variables x and v whose initial values are set to be 10 and
   0 respectively.*/
-  BallAgent<double> ball {10, 0};
+  BallAgent<float> ball {10, 0};
+  /* We now create a scenario for simulation and plot the trajectories of the agent's x with respect to time. */
+  vector<VanillaAgent<float>> Agents;
+  Scenario<float> scenario(Agents);
   /* The simulate() function takes as argument the time horizon -
   which is the time duration of the simulation - and the time step -
   which is the time interval for each step of computation. In our example,
-  we have time horizon 20 and time step 0.01. */
-  /*Todo: Changing the time-step leads to wrong simulations. Need to fix this*/
-  auto trajectories = ball.Simulate(20, 0.01);
+  we have time horizon 20. */
+  /*Discrete dynamics is not working in scenario. Need to know why?*/
+  //auto trajectories = scenario.Simulate(0, 20);
+  auto trajectories = ball.Simulate(20);
   /* We now plot the trajectories of the agent's x with respect to time. */
-  auto plotx = plotter::Plotter(&ball, "x", trajectories);
-  plotx.Plot();
+  /* TODO: Should plotter be templated? Or can we deduce the type of templated
+  variable from the agent directly?*/
+  scenario.Plot(0, "x", trajectories);
   /* We now plot the trajectories of the agent's v with respect to time. */
-  auto plotv = plotter::Plotter(&ball, "v", trajectories);
-  plotv.Plot();
+  scenario.Plot(0, "v", trajectories);
   /* We now plot the trajectories of the agent's v with respect to agent's x. */
-  auto plotxv = plotter::Plotter(&ball, "x", "v", trajectories);
-  plotxv.Plot();
+  /* TODO: Add exception handling in cases where the variable name is not defined
+  in the agent.cpp class. */
+  scenario.Plot(0, "x", "v", trajectories);
   return 0;
 }
 
