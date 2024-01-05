@@ -46,6 +46,7 @@ void BallAgent<T>::DiscDynamics()
   if (VanillaAgent<T>::CurrentState[0] <= 0)
   {
     VanillaAgent<T>::CurrentState[0] = 0;
-    VanillaAgent<T>::CurrentState[1] = -0.9*VanillaAgent<T>::CurrentState[1];
+    VanillaAgent<T>::CurrentState[1] = -0.9 * VanillaAgent<T>::CurrentState[1];
   }
+
 }

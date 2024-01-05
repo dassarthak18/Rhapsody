@@ -22,22 +22,22 @@ namespace plotter
 
       /* We have the option to plot any two variables, or plot a variable against time.*/
 
-      Plotter(VanillaAgent<T>& plottedAgent, string x_var_name, string y_var_name, vector<vector<pair<T, T> > > traj)
+      Plotter(VanillaAgent<T>* plottedAgent, string x_var_name, string y_var_name, vector<vector<pair<T, T> > > traj)
       {
-        auto it = find(plottedAgent.ContVars.begin(), plottedAgent.ContVars.end(), x_var_name);
-        int x_index = it - plottedAgent.ContVars.begin();
-        it = find(plottedAgent.ContVars.begin(), plottedAgent.ContVars.end(), y_var_name);
-        int y_index = it - plottedAgent.ContVars.begin();
+        auto it = find(plottedAgent->ContVars.begin(), plottedAgent->ContVars.end(), x_var_name);
+        int x_index = it - plottedAgent->ContVars.begin();
+        it = find(plottedAgent->ContVars.begin(), plottedAgent->ContVars.end(), y_var_name);
+        int y_index = it - plottedAgent->ContVars.begin();
         xAxis = traj[x_index];
         yAxis = traj[y_index];
         xvar = x_var_name;
         yvar = y_var_name;
       }
 
-      Plotter(VanillaAgent<T>& plottedAgent, string var_name, vector<vector<pair<T, T> > > traj)
+      Plotter(VanillaAgent<T>* plottedAgent, string var_name, vector<vector<pair<T, T> > > traj)
       {
-        auto it = find(plottedAgent.ContVars.begin(), plottedAgent.ContVars.end(), var_name);
-        int index = it - plottedAgent.ContVars.begin();
+        auto it = find(plottedAgent->ContVars.begin(), plottedAgent->ContVars.end(), var_name);
+        int index = it - plottedAgent->ContVars.begin();
         yAxis = traj[index];
         xvar = "Time";
         yvar = var_name;
