@@ -25,7 +25,6 @@ class VanillaAgent
     	 * Consider a parallel implementation of simulating n trajectories.
 	 	*/
 
-		/* Why virtual? I removed it and the override keyword in the derived class. It still works!*/
 		virtual void DiscDynamics()
 		{}
 };

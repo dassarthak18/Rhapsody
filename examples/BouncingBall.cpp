@@ -14,12 +14,10 @@ int main()
   scenario.add_agent(&ball);
 
   /* The simulate() function takes as argument the time horizon -
-  which is the time duration of the simulation - and the time step -
-  which is the time interval for each step of computation. In our example,
+  which is the time duration of the simulation. In our example,
   we have time horizon 20. */
 
   auto trajectories = scenario.Simulate(0, 20);
-
 
   /* We now plot the trajectories of the agent's x with respect to time. */
   /* TODO: Should plotter be templated? Or can we deduce the type of templated

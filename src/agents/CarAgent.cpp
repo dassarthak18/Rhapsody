@@ -81,19 +81,21 @@ class CarAgent : public VanillaAgent<T>
     }
 };
 
-/* ToDo: Comment in this dynamics. What is the objective of the controller?*/
+/* The function DiscDynamics defines the control logic of the agent.*/
 template<typename T>
 void CarAgent<T>::DiscDynamics()
 {
-    /* What does each conditions mean and what is the control action? */
+  /* If the ego comes too close to the lead, it will decelerate to increase the separation. */
   if (Others[0].CurrentState[0] - VanillaAgent<T>::CurrentState[0] <= 5 && Others[0].CurrentState[0] - VanillaAgent<T>::CurrentState[0] > 0 && VanillaAgent<T>::CurrentState[2] > 0)
   {
     VanillaAgent<T>::CurrentState[2] = -1*VanillaAgent<T>::CurrentState[2];
   }
+  /* If the ego falls too far behind the lead, it will accelerate so as to not lose trail. */
   else if (Others[0].CurrentState[0] - VanillaAgent<T>::CurrentState[0] >= 10 &&  VanillaAgent<T>::CurrentState[2] < 0)
   {
     VanillaAgent<T>::CurrentState[2] = -1*VanillaAgent<T>::CurrentState[2];
   }
+  /* In case of collision, the vehicle comes to a halt. */
   else if (VanillaAgent<T>::CurrentState[0] == Others[0].CurrentState[0])
   {
     VanillaAgent<T>::CurrentState[1] = 0;

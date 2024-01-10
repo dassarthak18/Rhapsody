@@ -1,8 +1,6 @@
 #include "../src/agents/CarAgent.cpp"
 #include "../src/scenario/scenario.hpp"
 
-/* How to model an ACC with more than 2 cars? Can our library support that? */
-
 int main()
 {
   /* To create an agent, we pass the initial values
@@ -20,12 +18,10 @@ int main()
   a basic default sensor.*/
   CarAgent<double> ego(8, 0, 28, Others); // This is the main agent we are interested in.
   /* We now create a scenario for simulation and plot the trajectories of the agent's x with respect to time. */
-  vector<VanillaAgent<double> > Agents;
-  Agents.push_back(ego);
-  Agents.push_back(lead);
-  Scenario<double> scenario(Agents);
-  auto trajectories = ego.Simulate(100);
-  //auto trajectories = scenario.Simulate(0, 100);
+  Scenario<double> scenario;
+  scenario.add_agent(&ego);
+  scenario.add_agent(&lead);
+  auto trajectories = scenario.Simulate(0, 100);
   scenario.Plot(0, "x", trajectories);
   return 0;
 }

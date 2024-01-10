@@ -39,14 +39,14 @@ class BallAgent : public VanillaAgent<T>
     }
 };
 
-/* ToDo: Comment on the discrete dynamics*/
+/* The function DiscDynamics defines the control logic of the agent.*/
 template<typename T>
 void BallAgent<T>::DiscDynamics()
 {
+  /* If the ball hits the ground it must rebound with some dampening. */
   if (VanillaAgent<T>::CurrentState[0] <= 0)
   {
     VanillaAgent<T>::CurrentState[0] = 0;
     VanillaAgent<T>::CurrentState[1] = -0.9 * VanillaAgent<T>::CurrentState[1];
   }
-
 }
