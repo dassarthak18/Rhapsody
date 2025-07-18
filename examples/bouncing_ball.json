@@ -1,0 +1,24 @@
+{
+    "environment": "BouncingBall",
+    "agents": {
+            "Ball": {
+                "vars": {"vy": "float", "y": "float"},
+                "modes": {
+                    "FALLING": {"invariants": ["y >= 0"], "flow": ["y': vy", "vy' = -9.8"]}
+                }
+            }
+        },    
+    "instances": {"Ball1": "Ball"},
+    "init": {
+        "Ball1": {"mode": "FALLING", "vy": 0.0, "y": [10.0, 20.0]}
+    },
+    "transitions": {
+    "Ball1": [{"from": "FALLING",
+                "to": "FALLING",
+                "when": ["Ball1.y <= 0", "Ball1.vy < 0"],
+                "reset": {"Ball1.vy": "-0.9 * Ball1.vy"}
+            }]
+    },
+    "verify": {"time_horizon": 10.0, "time_step": 0.01},
+    "assert": ["Ball1.y >= 0"]
+}
