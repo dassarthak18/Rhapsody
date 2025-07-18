@@ -4,7 +4,7 @@
             "Ball": {
                 "vars": {"vy": "float", "y": "float"},
                 "modes": {
-                    "FALLING": {"invariants": ["y >= 0"], "flow": ["y': vy", "vy' = -9.8"]}
+                    "FALLING": {"invariants": ["y >= 0"], "flow": ["y'= vy", "vy' = -9.8"]}
                 }
             }
         },    
