@@ -11,9 +11,9 @@ A C++ library for modelling, simulation, and verification of multi-agent hybrid 
 
 The following libraries are included in ``src/include`` directory:
 
+* **[gnuplot-cpp](https://github.com/martinruenz/gnuplot-cpp).** Lightweight C++ wrapper for GNUPlot, used to plot simulation traces for agents.
 * **[JSON for Modern C++](https://github.com/nlohmann/json).** C++ header-only library for parsing JSON format files.
 * **[Runge-Kutta ODE Solver](https://github.com/davidrzs/Runge-Kutta-ODE-Solver/tree/master).** Lightweight C++ header-only library providing explicit RK solvers for ODEs.
-* **[gnuplot-cpp](https://github.com/martinruenz/gnuplot-cpp).** Lightweight C++ wrapper for GNUPlot, used to plot simulation traces for agents.
 
 ## Dependencies
 
