@@ -11,6 +11,8 @@ The following libraries are included in ``src/include`` directory:
 
 ## Dependencies
 
+The following dependencies must be manually installed:
+
 * **[Eigen](https://github.com/PX4/eigen).** Linear algebra library required by Runge-Kutta ODE Solver. Can be installed on Debian-based systems via ``sudo apt install libeigen3-dev`` and on RPM based systems via ``sudo dnf install eigen3-devel``.
 * **[GNUPlot](http://www.gnuplot.info/).** Plotting library required by gnuplot-cpp. Can be installed on Debian-based systems via ``sudo apt install gnuplot`` and on RPM based systems via ``sudo dnf install gnuplot``.
 
