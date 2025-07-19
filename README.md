@@ -53,6 +53,10 @@ The following dependencies must be manually installed:
 }
 ```
 
+## Publications
+
+* **Dec 2024 (Preprint.)** Das, S. Modeling and Verification of Multi-Agent Cyber-Physical Systems in Verse Library. _TechRxiv_. [DOI: 10.36227/techrxiv.172470839.93311927/v2](https://www.techrxiv.org/users/816050/articles/1216819-modeling-and-verification-of-multi-agent-cyber-physical-systems-in-verse-library)
+
 ## TODO
 * Implement a 3-agent ACC benchmark. For that do we need to define a new agent?
 * Implement the NRS. Have a dummy agent to store shared variables.
