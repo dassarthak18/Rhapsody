@@ -2,7 +2,7 @@
     "environment": "BouncingBall",
     "agents": {
             "Ball": {
-                "vars": {"vy": "float", "y": "float"},
+                "vars": ["y", "vy"],
                 "modes": {
                     "FALLING": {"invariants": ["y >= 0"], "flow": ["y'= vy", "vy' = -9.8"]}
                 }
