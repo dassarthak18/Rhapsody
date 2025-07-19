@@ -1,7 +1,12 @@
-// parser.cpp
-#include "parser.h"
-#include <fstream>
+// parser.hpp
+#pragma once
+#include "json.hpp"
+#include <unordered_map>
+#include <string>
 #include <iostream>
+#include <fstream>
+
+std::unordered_map<std::string, nlohmann::json> parse_json_file(const std::string& filename);
 
 using json = nlohmann::json;
 
