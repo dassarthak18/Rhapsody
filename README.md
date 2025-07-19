@@ -31,7 +31,7 @@ The following dependencies must be manually installed:
     "environment": "BouncingBall", // Name of the environment
     "agents": { // Description of the agent classes
             "Ball": {
-                "vars": ["y": "float", "vy"], // Each agent has a set of continuous variables
+                "vars": ["y", "vy"], // Each agent has a set of continuous variables
                 "modes": {
                     "FALLING": {"invariants": ["y >= 0"], "flow": ["y'= vy", "vy' = -9.8"]} // Each agent has a set of modes, each with their own invariants and flow (linear and affine ODEs are supported)
                 }
