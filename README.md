@@ -24,7 +24,7 @@ The following dependencies must be manually installed:
 
 ## Example Usage
 
-``examples/bouncing_ball.json`` illustrates the basic idea of how to define a hybrid system a JSON file:
+``examples/bouncing_ball.json`` illustrates the basic idea of how to define a hybrid system as a JSON:
 
 ```json
 {
