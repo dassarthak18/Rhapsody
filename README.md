@@ -26,7 +26,7 @@ The following dependencies must be manually installed:
 
 ``examples/bouncing_ball.json`` illustrates the basic idea of how to define a hybrid system as a JSON:
 
-```json
+```json5
 {
     "environment": "BouncingBall", // Name of the environment
     "agents": { // Description of the agent classes
